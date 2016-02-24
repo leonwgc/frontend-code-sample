@@ -1,0 +1,141 @@
+<html>
+
+<head>
+  <style>
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1000;
+      background-color: #000;
+      opacity: .5;
+      filter: alpha(opacity=50);
+    }
+    
+    .modal-backdrop.fade {
+      opacity: 0;
+      filter: alpha(opacity=0);
+      -webkit-transition: opacity 400ms linear;
+      -moz-transition: opacity 400ms linear;
+      transition: opacity 400ms linear;
+    }
+    
+    .modal-dialog {
+      background-color: #fff;
+      z-index: 1001;
+      display: none;
+    }
+    
+    .modal-dialog.show {
+      display: block;
+    }
+    
+    .modal-dialog >div {
+      box-sizing: border-box;
+      min-height: 60px;
+      position: fixed;
+      z-index: 10001;
+      padding: 5px 20px;
+      border-radius: 5px;
+      background-color: #fff;
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%;
+    }
+    
+    .modal-dialog>.loading{
+      text-align: center;
+    }
+    
+    .modal-dialog>.loading>img{
+      width:32px;
+      height: 32px;
+      border:0;
+    }
+    .modal-dialog>.loading>p{
+      margin: 5px 0 15px 0;
+    }
+        
+  </style>
+</head>
+
+<body>
+  <button type="button" id='bt'>show</button>
+  
+  <div id='el' class="modal-dialog">
+    <div class='loading'>
+      <p>Loading</p>
+      <img src="../images/loading.gif" alt="loading">
+    </div>
+  </div>
+  
+
+  <script>
+    function Dialog(el){
+      if(el instanceof Dialog){
+        return el;
+      }
+      
+      if(typeof el==='string'){
+        el=document.getElementById(el);
+      }
+      
+      if(!el){
+        throw new Error('el must be dom element or dom id string');
+      }
+      
+      this.el=el;
+      
+      var backdrop = document.createElement('div');
+      backdrop.className = 'modal-backdrop';
+      // var that=this;
+      
+      // backdrop.addEventListener('click', function (e) {
+      //   if (e.target === backdrop) {
+      //     that.close();
+      //   }
+      // }, false);
+      
+      this.mask=backdrop;
+    }
+    
+    Dialog.prototype.open=function(){
+      var el = this.el;
+      var backdrop=this.mask;
+      el.className += ' show';
+      backdrop.className = backdrop.className.replace(/fade/g, ' ');
+      document.body.appendChild(backdrop);
+    };
+    
+    Dialog.prototype.close=function(){
+      var el = this.el;
+      var backdrop = this.mask;
+      el.className = el.className.replace(/show/g, ' ');
+      backdrop.className += ' fade';
+      setTimeout(function () {
+        if (backdrop.remove) {
+          backdrop.remove();
+        }
+        else {
+          backdrop.parentNode && backdrop.parentNode.removeChild(backdrop);
+        }
+
+      }, 400);
+    }
+    
+    var bt=document.getElementById('bt');
+    var div=document.getElementById('el');
+    
+    var el=new Dialog(div);
+
+    bt.onclick=function(){
+     el.open();
+    }
+    
+
+  </script>
+</body>
+
+</html>
