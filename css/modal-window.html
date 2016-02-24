@@ -1,0 +1,113 @@
+<html>
+
+<head>
+  <style>
+    .modal-dialog {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: #000;
+      z-index: 10000;
+      opacity: 0;
+      -webkit-transition: opacity 400ms ease-in;
+      -moz-transition: opacity 400ms ease-in;
+      transition: opacity 400ms ease-in;
+    }
+    
+    .modal-dialog.in {
+      display: block;
+      opacity: .5;
+      filter: alpha(opacity=50);
+    }
+    
+    .modal-dialog.fade {
+      filter: alpha(opacity=0);
+      opacity: 0;
+      display: none;
+    }
+    
+    .modal-dialog >div {
+      box-sizing: border-box;
+      min-height: 60px;
+      position: fixed;
+      z-index: 10001;
+      padding: 5px 20px;
+      border-radius: 5px;
+      background-color: #fff;
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%;
+    }
+    
+    /*close button*/
+    .modal-dialog .close {
+      font-size: 1.3em;
+      background-color: #fff;
+      color: #000;
+      border: 0;
+      cursor: pointer;
+      position: absolute;
+      right: 10px;
+      padding: 0;
+      width: 20px;
+      padding: 0;
+      border: 0;
+      outline: 0;
+      opacity: .5;
+      filter: alpha(opacity=50);
+    }
+    
+    .modal-dialog .close:hover {
+      opacity: .9;
+      filter: alpha(opacity=90);
+    }
+    
+    #dlg {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <button type="button" id='bt'>show</button>
+  <div id='dlg'>
+    <div>
+      <!--<button type="button" class="close" id='close'>x</button>-->
+      <div class="content">
+        hello,world
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var bt=document.getElementById('bt');
+    var dlg=document.getElementById('dlg');
+    
+    dlg.addEventListener('click',function(e){
+      // target is that event occured
+      // currentTarget is that add listener for the event
+      if(e.target===e.currentTarget){
+        // no click on the content area
+        close(dlg);
+      }
+    },false)
+    
+    bt.onclick=function(){
+      open();
+    }
+
+    function close(e){
+      e.style.display='none';
+      e.className='';
+    }
+    
+    function open(){
+      dlg.style.display='block';
+      dlg.className='modal-dialog in';
+    }
+  </script>
+</body>
+
+</html>
