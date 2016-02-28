@@ -10,7 +10,6 @@ app.use(responseTime());
 // favicon
 app.use(favicon('../pages/favicon.ico'));
 
-// html files in css folder ,but set root dir as the static folder
 app.use(serve('../'));
 
 app.use(error({template:'../pages/error.html'}));
