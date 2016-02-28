@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Error page for h5 mobile</title>
+  <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1,minimum-scale=1,user-scalable=no, minimal-ui">
+  <style>
+    * {
+      line-height: 1.5;
+      margin: 0;
+    }
+    
+    html {
+      color: #888;
+      font-family: sans-serif;
+      text-align: center;
+    }
+    
+    body {
+      left: 50%;
+      margin: -43px 0 0 -150px;
+      position: absolute;
+      top: 50%;
+      width: 300px;
+    }
+    
+    h1 {
+      color: #555;
+      font-size: 2em;
+      font-weight: 400;
+    }
+    
+    p {
+      line-height: 1.2;
+    }
+    
+    @media only screen and (max-width: 270px) {
+      body {
+        margin: 10px auto;
+        position: static;
+        width: 95%;
+      }
+      h1 {
+        font-size: 1.5em;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  {% if env == 'development' %}
+  <h1>{{error}}</h1>
+  <p>{{stack}}</p>
+  {% else %}
+  <h1>server is down</h1>
+  <p>sorry , the server is down, we are working on it!</p>
+  {% endif %}
+  <script>
+    document.addEventListener('touchmove',function(e){
+         e.preventDefault();
+       },false)
+  </script>
+</body>
+
+</html>
+<!-- IE needs 512+ bytes: http://blogs.msdn.com/b/ieinternals/archive/2010/08/19/http-error-pages-in-internet-explorer.aspx -->
