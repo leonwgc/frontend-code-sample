@@ -16,3 +16,5 @@ app.use(error({template:'../pages/error.html'}));
 
 
 app.listen(3000);
+
+console.log('app is running at port 3000');
