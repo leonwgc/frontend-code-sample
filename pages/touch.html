@@ -84,7 +84,7 @@
           y1,
           dx,
           dy,
-          threshold=30,
+          threshold=10,
           touch,
           left0,
           top0;
@@ -106,7 +106,6 @@
       y1 = touch.pageY;
       dx = x1 - x0;
       dy = y1 - y0;
-      // stage.style.transform = 'translate(' + dx + 'px,' + dy + 'px' + ')';
       stage.style.left = (left0 + dx) + 'px';
       stage.style.top = (top0 + dy) + 'px';
       e.preventDefault();
