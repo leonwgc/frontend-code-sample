@@ -1,10 +1,11 @@
-(function () {
-
+(function (window) {
+  // notice : doubletap will also trigger tap event, so for the same element, don't listen to both tap & doubletap. 
   var tap = 'tap',
     longTap = 'longtap',
     doubleTap = 'doubletap',
     longTapTimeThreshold = 750,
-    doubleTapTimeThreshold = 250;
+    doubleTapTimeThreshold = 250,
+    root=window.document.documentElement;
 
   function createTapEvent(type) {
     var event;
@@ -33,22 +34,34 @@
     dt,
     lastTapTime,
     threshold = 10,
-    touch;
+    touch,
+    longTapTimer;
 
-  document.documentElement.addEventListener('touchstart', function (e) {
+  root.addEventListener('touchstart', function (e) {
     touch = e.changedTouches[0];
     x0 = touch.pageX,
     y0 = touch.pageY;
     t0 = Date.now();
 
+    if (longTapTimer) {
+      clearTimeout(longTapTimer);
+    }
+
+    longTapTimer = setTimeout(function () {
+      fireTapEvent(e, createTapEvent(longTap));
+    }, longTapTimeThreshold);
+
     e.preventDefault();
   }, false);
 
-  document.documentElement.addEventListener('touchmove', function (e) {
+  root.addEventListener('touchmove', function (e) {
     e.preventDefault();
   }, false);
 
-  document.documentElement.addEventListener('touchend', function (e) {
+  root.addEventListener('touchend', function (e) {
+    if (longTapTimer) {
+      clearTimeout(longTapTimer);
+    }
     touch = e.changedTouches[0];
     x1 = touch.pageX,
     y1 = touch.pageY;
@@ -61,19 +74,13 @@
     var ts = Date.now() - lastTapTime;
     lastTapTime = Date.now();
     if (Math.abs(dx) <= threshold && Math.abs(dy) <= threshold) {
-      if (dt > longTapTimeThreshold) {
-        fireTapEvent(e, createTapEvent(longTap));
-      }
-      else {
-        // fire tap event
-        if (ts < doubleTapTimeThreshold) {
-          fireTapEvent(e, createTapEvent(doubleTap));
-        } else {
-          fireTapEvent(e, createTapEvent(tap));
-        }
-
+      // fire tap event
+      if (ts < doubleTapTimeThreshold) {
+        fireTapEvent(e, createTapEvent(doubleTap));
+      } else if (dt < longTapTimeThreshold) {
+        fireTapEvent(e, createTapEvent(tap));
       }
     }
     e.preventDefault();
   }, false);
-})();
+})(window);

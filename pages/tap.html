@@ -59,6 +59,7 @@
       position: absolute;
       left: 150px;
       top: 40px;
+      color:#fff;
     }
     
     .stage1 {
@@ -69,6 +70,7 @@
       position: absolute;
       left: 150px;
       top: 150px;
+      color:#fff;
     }
     
     #msg {
@@ -87,11 +89,11 @@
 <body>
 
   <div class="stage">
-
+    long tap
   </div>
-  
-  <div class="stage1">
 
+  <div class="stage1">
+    double tap
   </div>
   <button type="button">click</button>
   <div id='msg'>
@@ -109,30 +111,22 @@
     
     var stage=document.getElementsByClassName('stage')[0];
     var stage1=document.getElementsByClassName('stage1')[0];
-    var lasttime,
-     dtime=0;
-    stage.addEventListener('tap',function(){
-       if(!lasttime){
-         lasttime=Date.now();
-       }
-       else{
-         dtime=Date.now()-lasttime;
-         lasttime=Date.now();
-       }
-       printMsg('tapped stage at'+(new Date()).toLocaleString()+':'+dtime);
-    },false);
-    
     var bt = document.getElementsByTagName('button')[0];
+    
     bt.addEventListener('tap', function () {
-      alert('you tapped the button');
+      printMsg('you tapped the button'+Date.now());
     }, false);
 
     stage.addEventListener('longtap', function () {
-      printMsg('long tapped stage at' + (new Date()).toLocaleString() + ':' + dtime);
+      printMsg('long tapped stage at ' + Date.now());
+    }, false);
+    
+    stage.addEventListener('tap', function () {
+      printMsg('tapped stage at ' + Date.now());
     }, false);
 
     stage1.addEventListener('doubletap', function () {
-      printMsg('double tapped stage at' + (new Date()).toLocaleString() + ':' + dtime);
+      printMsg('double tapped stage at ' + Date.now());
     }, false);
   </script>
 </body>
