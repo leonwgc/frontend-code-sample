@@ -61,6 +61,16 @@
       top: 40px;
     }
     
+    .stage1 {
+      background: blue;
+      width: 100px;
+      height: 100px;
+      border: 1px solid gray;
+      position: absolute;
+      left: 150px;
+      top: 150px;
+    }
+    
     #msg {
       position: fixed;
       bottom: 0;
@@ -79,11 +89,15 @@
   <div class="stage">
 
   </div>
+  
+  <div class="stage1">
+
+  </div>
   <button type="button">click</button>
   <div id='msg'>
 
   </div>
-  
+
   <script src="../js/tap.js"></script>
 
   <script>
@@ -94,6 +108,7 @@
     }
     
     var stage=document.getElementsByClassName('stage')[0];
+    var stage1=document.getElementsByClassName('stage1')[0];
     var lasttime,
      dtime=0;
     stage.addEventListener('tap',function(){
@@ -107,10 +122,18 @@
        printMsg('tapped stage at'+(new Date()).toLocaleString()+':'+dtime);
     },false);
     
-    var bt=document.getElementsByTagName('button')[0];
-    bt.addEventListener('tap',function(){
+    var bt = document.getElementsByTagName('button')[0];
+    bt.addEventListener('tap', function () {
       alert('you tapped the button');
-    },false);
+    }, false);
+
+    stage.addEventListener('longtap', function () {
+      printMsg('long tapped stage at' + (new Date()).toLocaleString() + ':' + dtime);
+    }, false);
+
+    stage1.addEventListener('doubletap', function () {
+      printMsg('double tapped stage at' + (new Date()).toLocaleString() + ':' + dtime);
+    }, false);
   </script>
 </body>
 

@@ -1,14 +1,20 @@
 (function () {
-  function createTapEvent() {
+
+  var tap = 'tap',
+    longTap = 'longtap',
+    doubleTap = 'doubletap',
+    longTapTimeThreshold = 750,
+    doubleTapTimeThreshold = 250;
+
+  function createTapEvent(type) {
     var event;
     if ('Event' in window) {
-      event = new Event('tap');
+      event = new Event(type);
     }
     else {
       // old way
       event = document.createEvent('Event');
-      event.initEvent('tap', true, true);
-      event.name = 'tap';
+      event.initEvent(type, true, true);
     }
     return event;
   }
@@ -23,6 +29,9 @@
     y1,
     dx,
     dy,
+    t0,
+    dt,
+    lastTapTime,
     threshold = 10,
     touch;
 
@@ -30,6 +39,8 @@
     touch = e.changedTouches[0];
     x0 = touch.pageX,
     y0 = touch.pageY;
+    t0 = Date.now();
+
     e.preventDefault();
   }, false);
 
@@ -41,11 +52,27 @@
     touch = e.changedTouches[0];
     x1 = touch.pageX,
     y1 = touch.pageY;
+    dt = Date.now() - t0;
     dx = x1 - x0;
     dy = y1 - y0;
+    if (!lastTapTime) {
+      lastTapTime = Date.now();
+    }
+    var ts = Date.now() - lastTapTime;
+    lastTapTime = Date.now();
     if (Math.abs(dx) <= threshold && Math.abs(dy) <= threshold) {
-      // fire tap event
-      fireTapEvent(e, createTapEvent());
+      if (dt > longTapTimeThreshold) {
+        fireTapEvent(e, createTapEvent(longTap));
+      }
+      else {
+        // fire tap event
+        if (ts < doubleTapTimeThreshold) {
+          fireTapEvent(e, createTapEvent(doubleTap));
+        } else {
+          fireTapEvent(e, createTapEvent(tap));
+        }
+
+      }
     }
     e.preventDefault();
   }, false);
