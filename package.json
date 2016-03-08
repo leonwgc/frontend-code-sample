@@ -6,7 +6,8 @@
   "scripts": {
     "test": "karma start",
     "server": "cd server && ..\\node_modules\\.bin\\nodemon app.js",
-    "react":"cd react && ..\\node_modules\\.bin\\babel --presets react src --watch --out-dir build"
+    "react": "cd react && ..\\node_modules\\.bin\\babel --presets react src --watch --out-dir build",
+    "webpack":"node_modules\\.bin\\webpack --progress --colors --watch"
   },
   "repository": {
     "type": "git",
@@ -37,7 +38,8 @@
     "koa-response-time": "^1.0.2",
     "koa-static": "^2.0.0",
     "nodemon": "^1.9.1",
-    "phantomjs-prebuilt": "^2.1.4"
+    "phantomjs-prebuilt": "^2.1.4",
+    "webpack": "^1.12.14"
   },
   "dependencies": {
     "babel-preset-react": "^6.5.0",
