@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "karma start",
-    "koa": "node_modules\\.bin\\nodemon koa/app.js",
+    "koa": "node koa/app.js",
     "react": "node_modules\\.bin\\babel --presets react react/src --watch --out-dir react/build",
-    "webpack":"node_modules\\.bin\\webpack -d --progress --colors --watch"
+    "webpack": "node_modules\\.bin\\webpack -d --progress --colors --watch"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,10 @@
   "homepage": "https://github.com/leonwgc/frontend-code-sample#readme",
   "devDependencies": {
     "babel-cli": "^6.6.5",
+    "babel-core": "^6.7.0",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-react": "^6.5.0",
     "bootstrap": "^3.3.6",
     "jasmine-core": "^2.4.1",
     "karma": "^0.13.21",
@@ -42,7 +46,6 @@
     "webpack": "^1.12.14"
   },
   "dependencies": {
-    "babel-preset-react": "^6.5.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7"
   }
