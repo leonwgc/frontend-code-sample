@@ -8,28 +8,32 @@ var buildPath = path.join(__dirname, 'webpack', 'build');
 module.exports = {
   context: context,
   entry: {
-    reactlib:['react','react-dom'],
-    index: './index',
+    reactlib: ['react', 'react-dom'],
+    index: './index.js',
     index2: './index2',
-    r1:'./r1',
-    r2:'./r2',
+    r1: './r1',
+    r2: './r2',
   },
   output: {
     path: buildPath,
     filename: "[name].js"
   },
   resolve: {
-    extensions: ["", ".webpack.js", ".web.js", ".js", ".jsx"]
+    extensions: ["", ".webpack.js", ".web.js", ".js", ".jsx", ".less"]
   },
   module: {
     loaders: [
       {
         test: /\.jsx?$/,
         exclude: /(node_modules)/,
-        loader: 'babel', 
+        loader: 'babel',
         query: {
           presets: ['react', 'es2015']
         }
+      },
+      {
+        test: /\.css$/,
+        loader: "style!css!"
       }
     ]
   },
