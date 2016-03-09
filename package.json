@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "karma start",
-    "server": "cd server && ..\\node_modules\\.bin\\nodemon app.js",
-    "react": "cd react && ..\\node_modules\\.bin\\babel --presets react src --watch --out-dir build",
+    "server": "node_modules\\.bin\\nodemon server/app.js",
+    "react": "node_modules\\.bin\\babel --presets react react/src --watch --out-dir react/build",
     "webpack":"node_modules\\.bin\\webpack -d --progress --colors --watch"
   },
   "repository": {
