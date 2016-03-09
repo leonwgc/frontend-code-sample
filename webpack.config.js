@@ -8,6 +8,7 @@ var buildPath = path.join(__dirname, 'webpack', 'build');
 module.exports = {
   context: context,
   entry: {
+    reactlib:['react','react-dom'],
     index: './index',
     index2: './index2',
     r1:'./r1',
@@ -35,7 +36,7 @@ module.exports = {
   plugins: [
     new CommonsChunkPlugin({
       name: "reactlib",
-      chunks: ["r1", "r2"],
+      minChunks: Infinity
     })
   ]
 };
