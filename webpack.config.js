@@ -1,6 +1,5 @@
 var path = require("path");
 var webpack = require("webpack");
-var CommonsChunkPlugin = require("./node_modules/webpack/lib/optimize/CommonsChunkPlugin");
 
 var context = path.join(__dirname, 'webpack', 'src');
 var buildPath = path.join(__dirname, 'webpack', 'build');
@@ -42,7 +41,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new CommonsChunkPlugin({
+    new webpack.optimize.CommonsChunkPlugin({
       name: "reactlib",
       minChunks: Infinity
     })
