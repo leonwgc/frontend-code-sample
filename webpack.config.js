@@ -1,6 +1,8 @@
 var path = require("path");
 var webpack = require("webpack");
 
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+
 var context = path.join(__dirname, 'webpack', 'src');
 var buildPath = path.join(__dirname, 'webpack', 'build');
 
@@ -32,11 +34,11 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: "style!css!"
+        loader: ExtractTextPlugin.extract("style-loader", "css-loader")
       },
       {
         test: /\.less$/,
-        loader: "style!css!less"
+        loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader")
       }
     ]
   },
@@ -44,6 +46,7 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({
       name: "reactlib",
       minChunks: Infinity
-    })
+    }),
+    new ExtractTextPlugin("[name].css")
   ]
 };
