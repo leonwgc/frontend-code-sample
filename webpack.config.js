@@ -47,6 +47,7 @@ module.exports = {
       name: "reactlib",
       minChunks: Infinity
     }),
-    new ExtractTextPlugin("[name].css")
+    new ExtractTextPlugin("[name].css"),
+    // new webpack.optimize.UglifyJsPlugin()
   ]
 };
