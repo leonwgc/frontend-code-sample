@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+  <title>empty</title>
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    @-webkit-keyframes fadeInDown {
+      0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+      }
+      100% {
+        opacity: 1;
+        -webkit-transform: none;
+      }
+    }
+    
+    @keyframes fadeInDown {
+      0% {
+        opacity: 0;
+        transform: translate3d(0, -100%, 0);
+      }
+      100% {
+        opacity: 1;
+        transform: none;
+      }
+    }
+    
+    .fadeInDown {
+      -webkit-animation-name: fadeInDown;
+      animation-name: fadeInDown;
+      -webkit-animation-duration: 1s;
+      animation-duration: 1s;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+    }
+    
+    #hello {
+      width: 100px;
+      height: 100px;
+      background: red;
+      position: absolute;
+      left: 40%;
+      top: 40%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="hello">
+
+  </div>
+  <script>
+    document.addEventListener('click',function(){
+       var hello=document.getElementById('hello');
+       hello.className='fadeInDown';
+       
+       
+       hello.addEventListener('webkitAnimationEnd',function(){
+         hello.className=hello.className.replace(/fadeInDown/g,' ');
+       },false);
+       
+       hello.addEventListener('animationend',function(){
+         hello.className=hello.className.replace(/fadeInDown/g,' ');
+       },false);
+     },false);
+  </script>
+</body>
+
+</html>
