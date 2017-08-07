@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+  <title>triangle</title>
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    .flex-box1 {
+      display: flex;
+      width: 300px;
+      height: 100px;
+      border: 1px solid yellowgreen;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .flex-box1>.item {
+      border: 1px solid red;
+      width: 50px;
+      height: 50px;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+    }
+
+    .flex-box2 {
+      justify-content: space-around;
+    }
+
+    .flex-box3>.item:nth-child(3) {
+      flex-grow: 1;
+    }
+
+    .flex-box4 {
+      flex-direction: column;
+      justify-content: space-around;
+      height: 300px;
+      width: 100px;
+    }
+
+    .flex-box5 {
+      align-items: flex-start;
+    }
+
+    .flex-box5>div:first-child {
+      padding: 0 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="flex-box1">
+    <div class="item">item1</div>
+    <div class="item">item2</div>
+    <div class="item">item3</div>
+  </div>
+
+  <div class="flex-box1 flex-box2">
+    <div class="item">item1</div>
+    <div class="item">item2</div>
+    <div class="item">item3</div>
+  </div>
+  <!--item 3 take the whole left space-->
+  <div class="flex-box1 flex-box3">
+    <div class="item">item1</div>
+    <div class="item">item2</div>
+    <div class="item">item3</div>
+  </div>
+
+  <div class="flex-box1 flex-box4">
+    <div class="item">item1</div>
+    <div class="item">item2</div>
+    <div class="item">item3</div>
+  </div>
+
+  <div class="flex-box1 flex-box5">
+    <div>name</div>
+    <div>flex元素flex元素flex元素flex元素flex元素flex元素flex元素flex元素flex元素flex元素flex元素flex元素flex元素flex元素 </div>
+  </div>
+</body>
+
+</html>
