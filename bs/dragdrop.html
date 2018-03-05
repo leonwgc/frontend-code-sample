@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<title>empty</title>
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<style>
+		body {}
+
+		h2 {
+			font-size: 1rem;
+		}
+
+		.sortable li {
+			list-style: none;
+			border: 1px solid #CCC;
+			background: #F6F6F6;
+			font-family: "Tahoma";
+			color: #1C94C4;
+			margin: 5px;
+			padding: 5px;
+			height: 22px;
+		}
+
+		li.sortable-dragging {
+			display: none;
+		}
+
+		li.sortable-placeholder {
+			border: 1px dashed #CCC;
+			background: none;
+		}
+
+		.hide {
+			display: none;
+		}
+	</style>
+</head>
+
+<body>
+	<section>
+		<h2>Sortable List</h2>
+		<ul class="sortable list">
+			<li>Item 1</li>
+			<li>Item 2</li>
+			<li>Item 3</li>
+			<li>Item 4</li>
+			<li>Item 5</li>
+			<li>Item 6</li>
+		</ul>
+	</section>
+	<script>
+		var placeHolder = document.createElement('li');
+		placeHolder.draggable = true;
+		placeHolder.className = 'sortable-placeholder hide';
+		var ul = document.querySelector('.sortable');
+		ul.insertBefore(placeHolder, ul.firstElementChild);
+		var list = ul.children;
+
+		for (var i = 0; i < list.length; i++) {
+			list[i].setAttribute('draggable', true);
+
+			list[i].addEventListener('dragstart', function(ev) {
+				ev.dataTransfer.dropEffect = 'move';
+			}, false);
+
+			list[i].addEventListener('drag', function(ev) {
+				if (this.className.indexOf('sortable-dragging') === -1)
+					this.classList.add('sortable-dragging');
+			});
+
+
+			list[i].addEventListener('dragend', function(ev) {
+				this.classList.remove('sortable-dragging');
+				if (ev.dataTransfer.dropEffect === 'none') {
+					// cancelled
+					placeHolder.remove();
+					console.log('cancelled');
+				} else {
+					if (placeHolder.parentNode)
+						placeHolder.parentNode.replaceChild(this, placeHolder);
+				}
+			})
+
+			list[i].addEventListener('dragenter', function(ev) {
+				dropElement = this;
+				ev.dataTransfer.dropEffect = "move";
+				placeHolder.classList.remove('hide');
+				this.parentNode.insertBefore(placeHolder, this);
+			}, false)
+
+			list[i].addEventListener('dragover', function(ev) {
+				ev.dataTransfer.dropEffect = "move";
+				ev.preventDefault();
+			})
+
+			list[i].addEventListener('dragleave', function(ev) {
+
+			}, false)
+		};
+	</script>
+</body>
+
+</html>
