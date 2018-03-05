@@ -92,7 +92,11 @@
 				dropElement = this;
 				ev.dataTransfer.dropEffect = "move";
 				placeHolder.classList.remove('hide');
-				this.parentNode.insertBefore(placeHolder, this);
+				if (this.nextElementSibling) {
+					this.parentNode.insertBefore(placeHolder, this);
+				} else {
+					this.parentNode.appendChild(placeHolder);
+				}
 			}, false)
 
 			list[i].addEventListener('dragover', function(ev) {
